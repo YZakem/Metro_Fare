@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class simpleCalculator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Enter parking cost.");
+		Float park = keyboard.nextFloat();
+		System.out.println("Enter ride cost.");
+		Float ride = keyboard.nextFloat();
+		System.out.println("Will this be round trip? Y or N:");
+		String roundTrip = keyboard.next();
+		if (roundTrip.equals("Y")) {
+			ride = ride*2;
+		}
+		Float cost = park + ride;
+		System.out.println("Total daily cost: " + cost);
+
+	}
+
+}
