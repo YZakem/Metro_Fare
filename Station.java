@@ -3,6 +3,10 @@ public class Station {
 	final private double parkingCost;
 	final private double costToUnionStation;
 	final private String name;
+	
+	public String getName() {
+	return this.name;
+	}
 
 	public Station(String name, double parkingCost, double costToUnionStation) {
 		this.name = name;
