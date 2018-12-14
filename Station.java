@@ -10,7 +10,10 @@ public class Station {
 			throw new IllegalArgumentException("You don't get paid to park!");
 		}
 		this.parkingCost = parkingCost;
-		this.costToUnionStation = costToUnionStation;	
+		if (costToUnionStation< 0) {
+			throw new IllegalArgumentException("You don't get paid to go to Union Station!");
+		}
+		this.costToUnionStation = costToUnionStation;
 	}
 	
 	public double rideCost(boolean roundTrip) {
