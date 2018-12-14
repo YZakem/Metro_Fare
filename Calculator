@@ -11,11 +11,11 @@ public class simpleCalculator {
 		Float ride = keyboard.nextFloat();
 		System.out.println("Will this be round trip? Y or N:");
 		String roundTrip = keyboard.next();
-		if (roundTrip.equals("Y")) {
-			ride = ride*2;
-		}
-		Float cost = park + ride;
-		System.out.println("Total daily cost: " + cost);
+		
+		
+		Station unknown = new Station("", park, ride);
+		
+		System.out.println("Total daily cost: " + unknown.rideCost(roundTrip.equals("Y")));
 
 	}
 
