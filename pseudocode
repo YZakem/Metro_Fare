@@ -1,12 +1,6 @@
 #pseudocode for calculating fares
 
 Store parking and ride cost by station
-  - create key of park and ride with associated costs
-    - store string for park, prompt for parking cost
-      - put park: cost into a key pair under station
-    - store string for ride, prompt for ride cost
-      - put ride: cost into a key pair under station
-  - associate key with station
   
 Calculate cost of each station
   - multiply cost of ride by two
