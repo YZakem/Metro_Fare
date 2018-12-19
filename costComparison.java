@@ -1,17 +1,23 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CostComparison {
 
 	private ArrayList<Station> stations;
 	
+	/**
+	 * Takes user input to create an Array of stations in an instance of CostComparison.stations
+	 */
 	public void inputStations(){
 		this.stations = new ArrayList<>();
 		Scanner keyboard = new Scanner(System.in);
 		keyboard.useDelimiter("\r?\n");
 		System.out.println("Would you like to create a station? Y or N:");
 		String create = keyboard.next();
-		while (create.toUpperCase().equals("Y")) {
+		while (create.toUpperCase().equals("Y") || create.toUpperCase().equals("YES")) {
 			System.out.println("Enter name of station.");
 			String name = keyboard.next();
 			System.out.println("Enter parking cost.");
@@ -26,22 +32,39 @@ public class CostComparison {
 		
 	}
 
-	public static void main(String[] args) {
-		CostComparison comparison = new CostComparison();
-		comparison.inputStations();
-			System.out.println(comparison);
+	/**
+	 * Calculates total cost of each station and associates with station name in hashmap
+	 * @param stations
+	 */
+	public HashMap<String, Double> calculateTotalCost(ArrayList<Station> stations){
+		HashMap<String, Double> totalCosts = new HashMap<>();
+		for (Station station : this.stations) {
+			station.rideCost(true);
+			totalCosts.put(station.getName(), station.rideCost(true));
+		}
+		return totalCosts;
 	}
 
+	public ArrayList<Double> sortCosts(HashMap<String, Double> stationCosts) {
+		ArrayList<Double> sortedCosts = new ArrayList<Double>(stationCosts.values());
+		Collections.sort(sortedCosts);
+		return sortedCosts;
+	}
+
+
+	public static void main(String[] args) {
+		CostComparison comparison = new CostComparison();
+		comparison.inputStations();	//populates comparison with stations
+		System.out.println(comparison);
+		HashMap<String, Double> stationCostMap = comparison.calculateTotalCost(comparison.stations); // stores total costs
+		ArrayList<Double> sortedCosts = comparison.sortCosts(stationCostMap);	// stores sorted costs
+	}
 
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("There are " + this.stations.size() + " stations being compared.\n");
-		for (Station station : this.stations) {
-			builder.append(station + "\n");
-		}
-		return builder.toString();
+		String header = "There are " + this.stations.size() + " stations being compared.\n";
+		return header + stations.stream().map(station -> station.toString()).collect(Collectors.joining("\n"));
 	}
 
 }
