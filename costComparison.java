@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class CostComparison {
 
@@ -51,6 +51,16 @@ public class CostComparison {
 		return sortedCosts;
 	}
 
+	public void sortByStations(ArrayList<Double> costs, HashMap<String, Double> stationMap) {
+		System.out.println("In order of cheapest to most expensive, the station costs are:");
+		for (Double cost : costs) {
+			for (Entry<String, Double> entry : stationMap.entrySet()) {
+				if (entry.getValue().equals(cost)) {
+					System.out.println(entry.getKey() + ": $" + Math.round(entry.getValue() * 1000d) / 1000d);
+				}
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		CostComparison comparison = new CostComparison();
@@ -58,13 +68,14 @@ public class CostComparison {
 		System.out.println(comparison);
 		HashMap<String, Double> stationCostMap = comparison.calculateTotalCost(comparison.stations); // stores total costs
 		ArrayList<Double> sortedCosts = comparison.sortCosts(stationCostMap);	// stores sorted costs
+		comparison.sortByStations(sortedCosts, stationCostMap);
 	}
 
 
 	@Override
 	public String toString() {
-		String header = "There are " + this.stations.size() + " stations being compared.\n";
-		return header + stations.stream().map(station -> station.toString()).collect(Collectors.joining("\n"));
+		String header = "There are " + this.stations.size() + " stations being compared.";
+		return header;
 	}
 
 }
