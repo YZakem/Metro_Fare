@@ -17,17 +17,27 @@ public class CostComparison {
 		keyboard.useDelimiter("\r?\n");
 		System.out.println("Would you like to create a station? Y or N:");
 		String create = keyboard.next();
-		while (create.toUpperCase().equals("Y") || create.toUpperCase().equals("YES")) {
-			System.out.println("Enter name of station.");
-			String name = keyboard.next();
-			System.out.println("Enter parking cost.");
-			Float park = keyboard.nextFloat();
-			System.out.println("Enter ride cost.");
-			Float ride = keyboard.nextFloat();
-			Station station = new Station(name, park, ride);
-			this.stations.add(station);
-			System.out.print("Would you like to create another station? Y or N");
-			create = keyboard.next();
+		while (create.equals(create)){
+			if (create.toUpperCase().equals("Y") || create.toUpperCase().equals("YES")){
+				System.out.println("Enter name of station.");
+				String name = keyboard.next();
+				System.out.println("Enter parking cost.");
+				Float park = keyboard.nextFloat();
+				System.out.println("Enter ride cost.");
+				Float ride = keyboard.nextFloat();
+				Station station = new Station(name, park, ride);
+				this.stations.add(station);
+				System.out.print("Would you like to create another station? Y or N");
+				create = keyboard.next();
+			}
+			else if (create.toUpperCase().equals("N") || create.toUpperCase().equals("NO")) {
+				break;
+			}
+			else {
+				System.out.println("Please enter Y or N");
+				create = keyboard.next();
+			}
+			
 		}
 		
 	}
