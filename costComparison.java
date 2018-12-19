@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CostComparison {
 
 	private ArrayList<Station> stations;
 	
+	/**
+	 * Takes user input to create an Array of stations in an instance of CostComparison.stations
+	 */
 	public void inputStations(){
 		this.stations = new ArrayList<>();
 		Scanner keyboard = new Scanner(System.in);
@@ -22,17 +26,28 @@ public class CostComparison {
 			this.stations.add(station);
 			System.out.print("Would you like to create another station? Y or N");
 			create = keyboard.next();
+		}		
+	}
+
+	/**
+	 * Calculates total cost of each station and associates with station name in hashmap
+	 * @param stations
+	 */
+	public HashMap<String, Double> calculateTotalCost(ArrayList<Station> stations){
+		HashMap<String, Double> totalCosts = new HashMap<>();
+		for (Station station : this.stations) {
+			station.rideCost(true);
+			totalCosts.put(station.getName(), station.rideCost(true));
 		}
-		
+		return totalCosts;
 	}
 
 	public static void main(String[] args) {
 		CostComparison comparison = new CostComparison();
-		comparison.inputStations();
-			System.out.println(comparison);
+		comparison.inputStations();	//populates comparison with stations
+		System.out.println(comparison);
+		comparison.calculateTotalCost(comparison.stations);
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -43,5 +58,4 @@ public class CostComparison {
 		}
 		return builder.toString();
 	}
-
 }
