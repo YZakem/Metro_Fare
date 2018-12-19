@@ -17,7 +17,7 @@ public class CostComparison {
 		keyboard.useDelimiter("\r?\n");
 		System.out.println("Would you like to create a station? Y or N:");
 		String create = keyboard.next();
-		while (create.equals(create)){
+		while (true){
 			if (create.toUpperCase().equals("Y") || create.toUpperCase().equals("YES")){
 				System.out.println("Enter name of station.");
 				String name = keyboard.next();
@@ -55,12 +55,20 @@ public class CostComparison {
 		return totalCosts;
 	}
 
+	/**
+	 * Creates ArrayList of station total cost, sorted.
+	 */
+	
 	public ArrayList<Double> sortCosts(HashMap<String, Double> stationCosts) {
 		ArrayList<Double> sortedCosts = new ArrayList<Double>(stationCosts.values());
 		Collections.sort(sortedCosts);
 		return sortedCosts;
 	}
 
+	/**
+	 * Retrieves station names based on cost, prints in ascending order
+	 */
+	
 	public void sortByStations(ArrayList<Double> costs, HashMap<String, Double> stationMap) {
 		System.out.println("In order of cheapest to most expensive, the station costs are:");
 		for (Double cost : costs) {
